@@ -1,5 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { applyTheme, clearHistory, loadHistory, loadSettings, saveSettings } from '../lib/store.js';
+import { apiConfigured, apiUrl, checkConnection } from '../lib/api.js';
+
+function ApiStatusSection() {
+  const [status, setStatus] = useState({ status: 'unknown', url: apiUrl });
+  useEffect(() => {
+    checkConnection().then(setStatus);
+  }, []);
+  return (
+    <section className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200" aria-label="ব্যাকএন্ড সংযোগ">
+      <h2 className="text-lg font-bold text-slate-900">ব্যাকএন্ড সংযোগ (অনলাইন পরীক্ষা)</h2>
+      <p className="mt-1 text-sm text-slate-600">
+        API URL: <code className="rounded bg-slate-100 px-1">{apiConfigured() ? apiUrl : 'সেট করা হয়নি (VITE_API_URL খালি)'}</code>
+      </p>
+      <p className="mt-2 text-sm font-semibold">
+        অবস্থা:{' '}
+        {status.status === 'online' && <span className="text-green-700">সংযুক্ত — অনলাইন পরীক্ষা, ফলাফল ও ড্যাশবোর্ড চালু আছে</span>}
+        {status.status === 'offline' && <span className="text-red-700">পৌঁছানো যাচ্ছে না — PHP API চালু আছে কি না দেখো</span>}
+        {status.status === 'not_configured' && <span className="text-amber-700">সংযুক্ত নয় — লোকাল মোডে চলছে (রসায়ন পরীক্ষা পোর্টাল কাজ করবে)</span>}
+        {status.status === 'unknown' && <span className="text-slate-600">যাচাই করা হচ্ছে…</span>}
+      </p>
+      <p className="mt-2 text-xs leading-relaxed text-slate-500">
+        লোকালে: <code className="rounded bg-slate-100 px-1">VITE_API_URL=http://127.0.0.1:8080/api npm run dev</code> — আর backend ফোল্ডারে{' '}
+        <code className="rounded bg-slate-100 px-1">php -S 127.0.0.1:8080</code> চালাও। বিস্তারিত: backend/README.md।
+      </p>
+      <button
+        type="button"
+        onClick={() => checkConnection().then(setStatus)}
+        className="mt-3 inline-flex min-h-[44px] items-center rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+      >
+        সংযোগ আবার যাচাই করো
+      </button>
+    </section>
+  );
+}
 
 const THEMES = [
   ['system', 'সিস্টেম (ডিভাইস অনুযায়ী)'],
@@ -52,7 +86,7 @@ export default function SettingsPage({ onSettingsChange }) {
             id="def-count"
             value={settings.count}
             onChange={(e) => update({ count: Number(e.target.value) })}
-            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             {[5, 10, 20, 25].map((n) => (
               <option key={n} value={n}>
@@ -73,7 +107,7 @@ export default function SettingsPage({ onSettingsChange }) {
             max={120}
             value={settings.durationMin}
             onChange={(e) => update({ durationMin: Math.max(1, Math.min(120, Number(e.target.value) || 25)) })}
-            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           />
         </div>
 
@@ -86,9 +120,9 @@ export default function SettingsPage({ onSettingsChange }) {
                 type="button"
                 onClick={() => update({ negative: v })}
                 aria-pressed={settings.negative === v}
-                className={`min-h-[44px] flex-1 rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+                className={`min-h-[44px] flex-1 rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                   settings.negative === v
-                    ? 'bg-teal-700 text-white ring-teal-700'
+                    ? 'bg-blue-700 text-white ring-blue-700'
                     : 'bg-white text-slate-800 ring-slate-300 hover:bg-slate-50'
                 }`}
               >
@@ -106,7 +140,7 @@ export default function SettingsPage({ onSettingsChange }) {
             id="theme"
             value={settings.theme}
             onChange={(e) => update({ theme: e.target.value })}
-            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             {THEMES.map(([v, label]) => (
               <option key={v} value={v}>
@@ -153,7 +187,7 @@ export default function SettingsPage({ onSettingsChange }) {
             <button
               type="button"
               onClick={() => setConfirmClear(false)}
-              className="inline-flex min-h-[44px] items-center rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="inline-flex min-h-[44px] items-center rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               বাতিল করো
             </button>
@@ -165,6 +199,8 @@ export default function SettingsPage({ onSettingsChange }) {
           </p>
         )}
       </section>
+
+      <ApiStatusSection />
     </div>
   );
 }

@@ -1,0 +1,5 @@
+# Data files are runtime state — never commit them.
+# Only seed templates (e.g. ../data-seed-questions.json) belong in git.
+*
+!.gitignore
+!.htaccess

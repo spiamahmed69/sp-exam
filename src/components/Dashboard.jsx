@@ -52,7 +52,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
               id="subject"
               value={paper.id}
               onChange={(e) => onChange({ paperId: e.target.value, chapter: 'all', topic: 'all' })}
-              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               {PAPERS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -68,7 +68,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
               id="chapter"
               value={chapter}
               onChange={(e) => onChange({ chapter: e.target.value, topic: 'all' })}
-              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               <option value="all">সব অধ্যায় ({paper.questions.length}টি প্রশ্ন)</option>
               {chapters.map((c) => (
@@ -87,7 +87,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
                   id="topic"
                   value={topic}
                   onChange={(e) => onChange({ topic: e.target.value })}
-                  className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                  className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 >
                   <option value="all">
                     সব টপিক ({chapterObj?.count ?? 0}টি প্রশ্ন)
@@ -107,7 +107,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
               </>
             )}
 
-            <p className="mt-4 rounded-xl bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-900">
+            <p className="mt-4 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-900">
               এই নির্বাচনে প্রশ্ন আছে: {available.length}টি
               {available.length === 0 &&
                 ' — এই অধ্যায়/টপিকে প্রশ্ন নেই। অন্য অধ্যায় বা টপিক বেছে নাও।'}
@@ -128,9 +128,9 @@ export default function Dashboard({ selection, onChange, onStart }) {
                       type="button"
                       onClick={() => onChange({ count: n })}
                       aria-pressed={count === n}
-                      className={`min-h-[44px] min-w-[56px] rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+                      className={`min-h-[44px] min-w-[56px] rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                         count === n
-                          ? 'bg-teal-700 text-white ring-teal-700'
+                          ? 'bg-blue-700 text-white ring-blue-700'
                           : 'bg-white text-slate-800 ring-slate-300 hover:bg-slate-50'
                       } disabled:cursor-not-allowed disabled:opacity-40`}
                     >
@@ -156,7 +156,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
                   max={120}
                   value={durationMin}
                   onChange={(e) => onChange({ durationMin: Math.max(1, Math.min(120, Number(e.target.value) || 25)) })}
-                  className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                  className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 />
               </div>
               <div>
@@ -168,9 +168,9 @@ export default function Dashboard({ selection, onChange, onStart }) {
                       type="button"
                       onClick={() => onChange({ negative: v })}
                       aria-pressed={negative === v}
-                      className={`min-h-[44px] flex-1 rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+                      className={`min-h-[44px] flex-1 rounded-xl px-4 py-2 text-base font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                         negative === v
-                          ? 'bg-teal-700 text-white ring-teal-700'
+                          ? 'bg-blue-700 text-white ring-blue-700'
                           : 'bg-white text-slate-800 ring-slate-300 hover:bg-slate-50'
                       }`}
                     >
@@ -186,7 +186,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
                 type="checkbox"
                 checked={secondTimer}
                 onChange={(e) => onChange({ secondTimer: e.target.checked })}
-                className="mt-1 h-5 w-5 accent-teal-700"
+                className="mt-1 h-5 w-5 accent-blue-700"
               />
               <span className="text-sm text-slate-800">
                 <strong>Second Timer</strong> — চালু থাকলে ফলাফলে মোট মার্কের ৫%
@@ -198,7 +198,7 @@ export default function Dashboard({ selection, onChange, onStart }) {
               type="button"
               onClick={onStart}
               disabled={!canStart}
-              className="mt-5 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-teal-700 px-6 py-3 text-lg font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+              className="mt-5 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-blue-700 px-6 py-3 text-lg font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
             >
               পরীক্ষা শুরু করো
             </button>

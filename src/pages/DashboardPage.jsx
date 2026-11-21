@@ -33,25 +33,25 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-teal-800 p-6 text-white shadow-sm sm:p-8">
-        <p className="text-sm font-semibold text-teal-100">SP Exam · HSC 2026</p>
+      <section className="rounded-2xl bg-blue-800 p-6 text-white shadow-sm sm:p-8">
+        <p className="text-sm font-semibold text-blue-100">SP Exam · HSC 2026</p>
         <h1 className="mt-1 text-2xl font-bold leading-snug sm:text-3xl">
           রসায়ন মডেল পরীক্ষা — নিজের গতিতে, নিজের প্রশ্নব্যাংকে
         </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-teal-100">
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-blue-100">
           বিষয়, অধ্যায় ও টপিক বেছে পরীক্ষা দাও। পরীক্ষা শেষ হলেই স্কোর, সঠিক/ভুল
           হিসাব ও প্রতিটি প্রশ্নের সঠিক উত্তর দেখতে পাবে।
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link
             to="/exam-portal"
-            className="inline-flex min-h-[48px] items-center rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-teal-800 hover:bg-teal-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="inline-flex min-h-[48px] items-center rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-blue-800 hover:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             এখনই পরীক্ষা দাও
           </Link>
           <Link
             to="/aap-portal"
-            className="inline-flex min-h-[48px] items-center rounded-xl bg-teal-700 px-5 py-2.5 text-sm font-bold text-white ring-1 ring-teal-500 hover:bg-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="inline-flex min-h-[48px] items-center rounded-xl bg-blue-700 px-5 py-2.5 text-sm font-bold text-white ring-1 ring-blue-500 hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             AAP Pathshala পোর্টাল
           </Link>
@@ -70,7 +70,7 @@ export default function DashboardPage() {
           },
         ].map((s) => (
           <div key={s.label} className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-            <p className="text-2xl font-bold tabular-nums text-teal-700">{s.value}</p>
+            <p className="text-2xl font-bold tabular-nums text-blue-700">{s.value}</p>
             <p className="mt-1 text-xs text-slate-600">{s.label}</p>
           </div>
         ))}
@@ -100,11 +100,11 @@ export default function DashboardPage() {
           <Link
             key={c.to}
             to={c.to}
-            className="group flex min-h-[44px] flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="group flex min-h-[44px] flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             <h2 className="text-lg font-bold text-slate-900">{c.title}</h2>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{c.desc}</p>
-            <span className="mt-4 text-sm font-bold text-teal-700 group-hover:text-teal-800">
+            <span className="mt-4 text-sm font-bold text-blue-700 group-hover:text-blue-800">
               {c.cta} →
             </span>
           </Link>

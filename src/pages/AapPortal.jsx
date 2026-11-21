@@ -65,7 +65,7 @@ export default function AapPortal() {
           <button
             type="button"
             onClick={reload}
-            className="inline-flex min-h-[44px] items-center rounded-xl px-4 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="inline-flex min-h-[44px] items-center rounded-xl px-4 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             ↻ Reload
           </button>
@@ -73,7 +73,7 @@ export default function AapPortal() {
             href={AAP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-teal-700 px-4 py-2 text-sm font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-blue-700 px-4 py-2 text-sm font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900"
           >
             Open AAP Pathshala ↗
           </a>
@@ -91,7 +91,7 @@ export default function AapPortal() {
           <button
             type="button"
             onClick={markFailed}
-            className="min-h-[44px] rounded-lg px-3 py-1.5 font-semibold text-teal-700 underline focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="min-h-[44px] rounded-lg px-3 py-1.5 font-semibold text-blue-700 underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             পেজ লোড হচ্ছে না?
           </button>
@@ -108,7 +108,7 @@ export default function AapPortal() {
           >
             <div
               aria-hidden="true"
-              className="h-10 w-10 animate-spin rounded-full border-4 border-teal-200 border-t-teal-700"
+              className="h-10 w-10 animate-spin rounded-full border-4 border-blue-200 border-t-blue-700"
             />
             <p className="text-sm font-semibold text-slate-800">AAP Pathshala লোড হচ্ছে…</p>
             <p className="max-w-md text-xs leading-relaxed text-slate-500">
@@ -134,14 +134,14 @@ export default function AapPortal() {
                 href={AAP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center rounded-xl bg-teal-700 px-6 py-3 text-sm font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900"
+                className="inline-flex min-h-[48px] items-center rounded-xl bg-blue-700 px-6 py-3 text-sm font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900"
               >
                 Open AAP Pathshala ↗
               </a>
               <button
                 type="button"
                 onClick={reload}
-                className="inline-flex min-h-[48px] items-center rounded-xl px-6 py-3 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                className="inline-flex min-h-[48px] items-center rounded-xl px-6 py-3 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
               >
                 আবার চেষ্টা করো
               </button>

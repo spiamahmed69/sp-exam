@@ -19,7 +19,7 @@ export default function Results({ questions, answers, result, timeUsedSec, confi
     <div className="space-y-6">
       <section className="rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200">
         <h2 className="text-2xl font-bold text-slate-900">ফলাফল</h2>
-        <p className="mt-2 text-5xl font-bold tabular-nums text-teal-700">
+        <p className="mt-2 text-5xl font-bold tabular-nums text-blue-700">
           {Number(result.score.toFixed(2))} <span className="text-2xl text-slate-500">/ {result.totalMarks}</span>
         </p>
         <div className="mx-auto mt-5 grid max-w-2xl grid-cols-2 gap-3 text-sm sm:grid-cols-4">
@@ -38,10 +38,10 @@ export default function Results({ questions, answers, result, timeUsedSec, confi
           </p>
         </div>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
-          <button type="button" onClick={onRetake} className="min-h-[44px] rounded-xl bg-teal-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900">
+          <button type="button" onClick={onRetake} className="min-h-[44px] rounded-xl bg-blue-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900">
             আবার পরীক্ষা দাও
           </button>
-          <button type="button" onClick={onDashboard} className="min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600">
+          <button type="button" onClick={onDashboard} className="min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
             ড্যাশবোর্ডে ফিরে যাও
           </button>
         </div>
@@ -61,8 +61,8 @@ export default function Results({ questions, answers, result, timeUsedSec, confi
                 type="button"
                 onClick={() => setFilter(v)}
                 aria-pressed={filter === v}
-                className={`min-h-[44px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
-                  filter === v ? 'bg-teal-700 text-white ring-teal-700' : 'bg-white text-slate-800 ring-slate-300 hover:bg-slate-50'
+                className={`min-h-[44px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
+                  filter === v ? 'bg-blue-700 text-white ring-blue-700' : 'bg-white text-slate-800 ring-slate-300 hover:bg-slate-50'
                 }`}
               >
                 {label}

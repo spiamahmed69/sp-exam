@@ -59,7 +59,7 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
         </div>
         <div
           className={`rounded-xl px-4 py-2 text-lg font-bold tabular-nums ${
-            lowTime ? 'bg-red-100 text-red-800' : 'bg-teal-50 text-teal-900'
+            lowTime ? 'bg-red-100 text-red-800' : 'bg-blue-50 text-blue-900'
           }`}
           role="timer"
           aria-live="off"
@@ -70,7 +70,7 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
         <button
           type="button"
           onClick={onExit}
-          className="min-h-[44px] rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+          className="min-h-[44px] rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
         >
           পরীক্ষা ছেড়ে দাও
         </button>
@@ -87,11 +87,11 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
               onClick={() => setIndex(i)}
               aria-label={`প্রশ্ন ${i + 1}${answered ? ' (উত্তর দেওয়া)' : ''}`}
               aria-current={i === index}
-              className={`min-h-[44px] min-w-[44px] rounded-lg px-2 py-2 text-sm font-bold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+              className={`min-h-[44px] min-w-[44px] rounded-lg px-2 py-2 text-sm font-bold ring-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                 i === index
-                  ? 'bg-teal-700 text-white ring-teal-700'
+                  ? 'bg-blue-700 text-white ring-blue-700'
                   : answered
-                    ? 'bg-teal-100 text-teal-900 ring-teal-300'
+                    ? 'bg-blue-100 text-blue-900 ring-blue-300'
                     : 'bg-white text-slate-700 ring-slate-300 hover:bg-slate-50'
               }`}
             >
@@ -121,10 +121,10 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
                 role="radio"
                 aria-checked={selected}
                 onClick={() => choose(i)}
-                className={`flex min-h-[48px] w-full items-start gap-3 rounded-xl border px-4 py-3 text-left text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+                className={`flex min-h-[48px] w-full items-start gap-3 rounded-xl border px-4 py-3 text-left text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                   selected
-                    ? 'border-teal-700 bg-teal-50 ring-1 ring-teal-700'
-                    : 'border-slate-300 bg-white hover:border-teal-600 hover:bg-teal-50/50'
+                    ? 'border-blue-700 bg-blue-50 ring-1 ring-blue-700'
+                    : 'border-slate-300 bg-white hover:border-blue-600 hover:bg-blue-50/50'
                 }`}
               >
                 <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-800">
@@ -142,7 +142,7 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
               type="button"
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
               disabled={index === 0}
-              className="min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 disabled:opacity-40"
+              className="min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 disabled:opacity-40"
             >
               ← আগেরটি
             </button>
@@ -150,7 +150,7 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
               type="button"
               onClick={() => setIndex((i) => Math.min(questions.length - 1, i + 1))}
               disabled={index === questions.length - 1}
-              className="min-h-[44px] rounded-xl bg-teal-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900 disabled:opacity-40"
+              className="min-h-[44px] rounded-xl bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900 disabled:opacity-40"
             >
               পরেরটি →
             </button>
@@ -188,14 +188,14 @@ export default function Exam({ questions, durationMin, onSubmit, onExit }) {
               <button
                 type="button"
                 onClick={submit}
-                className="min-h-[44px] flex-1 rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900"
+                className="min-h-[44px] flex-1 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900"
               >
                 হ্যাঁ, জমা দাও
               </button>
               <button
                 type="button"
                 onClick={() => setConfirming(false)}
-                className="min-h-[44px] flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                className="min-h-[44px] flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
               >
                 ফিরে যাও
               </button>

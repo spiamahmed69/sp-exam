@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
 }
 
 body {
@@ -22,14 +22,14 @@ body {
 .dark .bg-white { background-color: #1e293b !important; }
 .dark .bg-slate-50 { background-color: #16233a !important; }
 .dark .bg-slate-100 { background-color: #0f172a !important; }
-.dark .bg-teal-50 { background-color: #123129 !important; }
+.dark .bg-blue-50 { background-color: #123129 !important; }
 .dark .bg-green-50 { background-color: #14301f !important; }
 .dark .bg-red-50 { background-color: #3a1b18 !important; }
 .dark .bg-amber-50 { background-color: #33240f !important; }
 .dark .text-slate-900, .dark .text-slate-800 { color: #f1f5f9 !important; }
 .dark .text-slate-700, .dark .text-slate-600 { color: #cbd5e1 !important; }
 .dark .text-slate-500 { color: #94a3b8 !important; }
-.dark .text-teal-900 { color: #7fe3cb !important; }
+.dark .text-blue-900 { color: #7fe3cb !important; }
 .dark .ring-slate-200 { --tw-ring-color: #334155 !important; }
 .dark .ring-slate-300 { --tw-ring-color: #475569 !important; }
 .dark .border-slate-200, .dark .border-slate-300 { border-color: #334155 !important; }
@@ -38,6 +38,6 @@ body {
 
 /* Keep focus visible everywhere (keyboard users). */
 :focus-visible {
-  outline: 2px solid #0f766e;
+  outline: 2px solid #1d4ed8;
   outline-offset: 2px;
 }

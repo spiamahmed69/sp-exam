@@ -1,0 +1,7 @@
+# SP Exam backend — never commit runtime secrets or data.
+config/secret.key
+php-errors.log
+data/*.json
+data/*.bak
+!data/.gitignore
+!data/.htaccess

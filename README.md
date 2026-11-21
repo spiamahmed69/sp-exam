@@ -1,3 +1,40 @@
+# SP Exam — Online Examination Platform
+
+React + Vite + Tailwind frontend, PHP 8+ JSON backend, three roles
+(student / teacher / admin), server-timed exams, MCQ auto-scoring with
+negative marking, manual CQ evaluation, published results, leaderboard.
+**Nothing is deployed from this build yet** — see `docs/DEPLOYMENT.md`
+for the exact Vercel + InfinityFree steps that remain.
+
+## Full platform (2026-11-21)
+
+- **Backend:** `backend/` — PHP 8+ REST API, JSON file storage only
+  (`flock()` + atomic writes, no MySQL/PostgreSQL). Single front
+  controller `backend/api/index.php`; docs in `backend/README.md` and
+  `docs/API.md`. Run locally: `cd backend && php -S 127.0.0.1:8080`
+  (API at `http://127.0.0.1:8080/api`).
+- **Frontend:** `VITE_API_URL=http://127.0.0.1:8080/api npm run dev`.
+  Without `VITE_API_URL` the app shows a "Backend not connected" banner
+  and keeps working in local/offline mode — it never shows fake API data.
+- **Seed accounts (change after first login):** admin@sp-exam.local /
+  `Admin123!`, teacher@sp-exam.local / `Teacher123!`,
+  student@sp-exam.local / `Student123!`.
+- **Seeded exams (real bank, 50 questions):** HSC Chemistry 1st Paper
+  and 2nd Paper model exams, 25 MCQ each, 25 min, negative 0.25.
+- **Routes:** public `/home /about /features /contact /login /register`;
+  student `/dashboard /exams /exams/:id /exam/:attemptId /results
+  /history /leaderboard /profile /settings`; teacher `/teacher
+  /teacher/exams /teacher/exams/new /teacher/exams/:id/questions
+  /teacher/submissions /teacher/evaluate/:resultId /teacher/results`;
+  admin `/admin /admin/users /admin/teachers /admin/students /admin/exams
+  /admin/subjects /admin/announcements /admin/reports /admin/settings
+  /admin/audit-logs /admin/backup`. The original local Chemistry exam
+  portal (`/`, `/exam-portal`, `/aap-portal`) is unchanged and still
+  works offline.
+- **Design:** UI/UX Pro Max guidance applied — primary blue #2563EB,
+  orange #EA580C CTAs, Plus Jakarta Sans + Hind Siliguri, Lucide icons,
+  44px touch targets, light/dark mode, EN/BN nav toggle.
+
 # SP Exam — রসায়ন মডেল পরীক্ষা
 
 React + Vite + Tailwind CSS দিয়ে তৈরি, Vercel-এ deploy করার জন্য প্রস্তুত একটি

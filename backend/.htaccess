@@ -1,0 +1,15 @@
+# SP Exam backend — route everything through api/index.php.
+# data/ and config/ are denied separately by their own .htaccess files.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # No RewriteBase: relative substitution stays inside this folder, so the
+    # backend works in any subfolder (e.g. htdocs/spexam-api/) as well as
+    # at a docroot. The path after /api/ is passed as PATH_INFO.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/(.*)$ api/index.php/$1 [QSA,L]
+</IfModule>
+
+# Never serve PHP errors to the browser in production.
+php_flag display_errors Off
+php_value error_log "php-errors.log"

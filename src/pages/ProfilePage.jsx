@@ -44,7 +44,7 @@ export default function ProfilePage() {
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
               placeholder="তোমার নাম লেখো"
-              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             />
           </div>
           <div>
@@ -55,7 +55,7 @@ export default function ProfilePage() {
               id="target"
               value={profile.target}
               onChange={(e) => setProfile({ ...profile, target: e.target.value })}
-              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               {TARGETS.map((t) => (
                 <option key={t} value={t}>
@@ -74,12 +74,12 @@ export default function ProfilePage() {
               value={profile.phone}
               onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
               placeholder="01XXXXXXXXX"
-              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="mt-1 min-h-[44px] w-full rounded-xl border border-slate-300 px-3 py-2.5 text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             />
           </div>
           <button
             type="submit"
-            className="inline-flex min-h-[48px] items-center rounded-xl bg-teal-700 px-6 py-2.5 text-sm font-bold text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-900"
+            className="inline-flex min-h-[48px] items-center rounded-xl bg-blue-700 px-6 py-2.5 text-sm font-bold text-white hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-900"
           >
             সংরক্ষণ করো
           </button>
@@ -101,8 +101,8 @@ export default function ProfilePage() {
         ) : (
           <>
             <div className="mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-              <div className="rounded-xl bg-teal-50 px-3 py-3">
-                <p className="text-lg font-bold text-teal-800">{total}টি</p>
+              <div className="rounded-xl bg-blue-50 px-3 py-3">
+                <p className="text-lg font-bold text-blue-800">{total}টি</p>
                 <p className="text-slate-600">পরীক্ষা</p>
               </div>
               <div className="rounded-xl bg-green-50 px-3 py-3">

@@ -11,6 +11,42 @@ import SettingsPage from './pages/SettingsPage.jsx';
 import { PAPERS } from './data/chemistry.js';
 import { filterQuestions, scoreExam, shuffled } from './lib/exam.js';
 import { applyTheme, loadSettings, recordResult } from './lib/store.js';
+import { AuthProvider, ProtectedRoute, RequireRole } from './lib/auth.jsx';
+import { ToastProvider } from './components/ui.jsx';
+// Public pages
+import PublicLayout from './pages/public/PublicLayout.jsx';
+import HomePage from './pages/public/HomePage.jsx';
+import AboutPage from './pages/public/AboutPage.jsx';
+import FeaturesPage from './pages/public/FeaturesPage.jsx';
+import ContactPage from './pages/public/ContactPage.jsx';
+import LoginPage from './pages/public/LoginPage.jsx';
+import RegisterPage from './pages/public/RegisterPage.jsx';
+// Student (API) pages
+import StudentDashboard from './pages/student/StudentDashboard.jsx';
+import ExamsPage from './pages/student/ExamsPage.jsx';
+import ExamInstructionsPage from './pages/student/ExamInstructionsPage.jsx';
+import OnlineExamPage from './pages/student/OnlineExamPage.jsx';
+import ResultsPage from './pages/student/ResultsPage.jsx';
+import HistoryPage from './pages/student/HistoryPage.jsx';
+import LeaderboardPage from './pages/student/LeaderboardPage.jsx';
+// Teacher pages
+import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx';
+import TeacherExams from './pages/teacher/TeacherExams.jsx';
+import CreateExam from './pages/teacher/CreateExam.jsx';
+import QuestionManager from './pages/teacher/QuestionManager.jsx';
+import SubmissionsPage from './pages/teacher/SubmissionsPage.jsx';
+import EvaluatePage from './pages/teacher/EvaluatePage.jsx';
+import TeacherResults from './pages/teacher/TeacherResults.jsx';
+// Admin pages
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import AdminUsers from './pages/admin/AdminUsers.jsx';
+import AdminExams from './pages/admin/AdminExams.jsx';
+import AdminSubjects from './pages/admin/AdminSubjects.jsx';
+import AdminAnnouncements from './pages/admin/AdminAnnouncements.jsx';
+import AdminReports from './pages/admin/AdminReports.jsx';
+import AdminSettings from './pages/admin/AdminSettings.jsx';
+import AdminAuditLogs from './pages/admin/AdminAuditLogs.jsx';
+import AdminBackup from './pages/admin/AdminBackup.jsx';
 
 function Shell() {
   const navigate = useNavigate();
@@ -39,7 +75,6 @@ function Shell() {
 
   function applySettings(next) {
     setSettings(next);
-    // Settings are the exam defaults: apply them to the next exam.
     setSelection((s) => ({
       ...s,
       count: next.count,
@@ -69,7 +104,6 @@ function Shell() {
     setExamAnswers(answers);
     setExamResult(result);
     setTimeUsedSec(usedSec);
-    // Real local exam history (profile page reads this).
     recordResult({
       date: new Date().toISOString(),
       paperTitle: paper?.title || '',
@@ -90,6 +124,17 @@ function Shell() {
 
   return (
     <Routes>
+      {/* Public site (no login needed) */}
+      <Route element={<PublicLayout />}>
+        <Route path="home" element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="features" element={<FeaturesPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+      </Route>
+
+      {/* App shell — existing local exam flow kept intact, plus API pages */}
       <Route element={<Layout />}>
         <Route index element={<DashboardPage />} />
         <Route
@@ -139,6 +184,38 @@ function Shell() {
         <Route path="aap-portal" element={<AapPortal />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage onSettingsChange={applySettings} />} />
+
+        {/* Student (API) */}
+        <Route path="dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
+        <Route path="exams" element={<ProtectedRoute><ExamsPage /></ProtectedRoute>} />
+        <Route path="exams/:id" element={<ProtectedRoute><ExamInstructionsPage /></ProtectedRoute>} />
+        <Route path="exam/:attemptId" element={<ProtectedRoute><OnlineExamPage /></ProtectedRoute>} />
+        <Route path="results" element={<ProtectedRoute><ResultsPage /></ProtectedRoute>} />
+        <Route path="history" element={<ProtectedRoute><HistoryPage /></ProtectedRoute>} />
+        <Route path="leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
+
+        {/* Teacher (API) */}
+        <Route path="teacher" element={<RequireRole roles={['teacher', 'admin']}><TeacherDashboard /></RequireRole>} />
+        <Route path="teacher/exams" element={<RequireRole roles={['teacher', 'admin']}><TeacherExams /></RequireRole>} />
+        <Route path="teacher/exams/new" element={<RequireRole roles={['teacher', 'admin']}><CreateExam /></RequireRole>} />
+        <Route path="teacher/exams/:id/questions" element={<RequireRole roles={['teacher', 'admin']}><QuestionManager /></RequireRole>} />
+        <Route path="teacher/submissions" element={<RequireRole roles={['teacher', 'admin']}><SubmissionsPage /></RequireRole>} />
+        <Route path="teacher/evaluate/:resultId" element={<RequireRole roles={['teacher', 'admin']}><EvaluatePage /></RequireRole>} />
+        <Route path="teacher/results" element={<RequireRole roles={['teacher', 'admin']}><TeacherResults /></RequireRole>} />
+
+        {/* Admin (API) */}
+        <Route path="admin" element={<RequireRole roles={['admin']}><AdminDashboard /></RequireRole>} />
+        <Route path="admin/users" element={<RequireRole roles={['admin']}><AdminUsers /></RequireRole>} />
+        <Route path="admin/teachers" element={<RequireRole roles={['admin']}><AdminUsers roleFilter="teacher" /></RequireRole>} />
+        <Route path="admin/students" element={<RequireRole roles={['admin']}><AdminUsers roleFilter="student" /></RequireRole>} />
+        <Route path="admin/exams" element={<RequireRole roles={['admin']}><AdminExams /></RequireRole>} />
+        <Route path="admin/subjects" element={<RequireRole roles={['admin']}><AdminSubjects /></RequireRole>} />
+        <Route path="admin/announcements" element={<RequireRole roles={['admin']}><AdminAnnouncements /></RequireRole>} />
+        <Route path="admin/reports" element={<RequireRole roles={['admin']}><AdminReports /></RequireRole>} />
+        <Route path="admin/settings" element={<RequireRole roles={['admin']}><AdminSettings /></RequireRole>} />
+        <Route path="admin/audit-logs" element={<RequireRole roles={['admin']}><AdminAuditLogs /></RequireRole>} />
+        <Route path="admin/backup" element={<RequireRole roles={['admin']}><AdminBackup /></RequireRole>} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
@@ -148,7 +225,11 @@ function Shell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Shell />
+      <AuthProvider>
+        <ToastProvider>
+          <Shell />
+        </ToastProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
