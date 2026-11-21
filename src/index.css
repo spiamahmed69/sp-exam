@@ -12,6 +12,30 @@ body {
   color: #0f172a;
 }
 
+/* Dark theme (class on <html>, toggled from Settings).
+   The app uses light Tailwind surfaces throughout, so the theme is applied
+   with targeted overrides on the surfaces it actually uses. */
+.dark body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+.dark .bg-white { background-color: #1e293b !important; }
+.dark .bg-slate-50 { background-color: #16233a !important; }
+.dark .bg-slate-100 { background-color: #0f172a !important; }
+.dark .bg-teal-50 { background-color: #123129 !important; }
+.dark .bg-green-50 { background-color: #14301f !important; }
+.dark .bg-red-50 { background-color: #3a1b18 !important; }
+.dark .bg-amber-50 { background-color: #33240f !important; }
+.dark .text-slate-900, .dark .text-slate-800 { color: #f1f5f9 !important; }
+.dark .text-slate-700, .dark .text-slate-600 { color: #cbd5e1 !important; }
+.dark .text-slate-500 { color: #94a3b8 !important; }
+.dark .text-teal-900 { color: #7fe3cb !important; }
+.dark .ring-slate-200 { --tw-ring-color: #334155 !important; }
+.dark .ring-slate-300 { --tw-ring-color: #475569 !important; }
+.dark .border-slate-200, .dark .border-slate-300 { border-color: #334155 !important; }
+.dark select, .dark input { background-color: #1e293b !important; color: #f1f5f9 !important; }
+.dark .divide-slate-100 > * + * { border-color: #334155 !important; }
+
 /* Keep focus visible everywhere (keyboard users). */
 :focus-visible {
   outline: 2px solid #0f766e;
