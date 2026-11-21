@@ -57,6 +57,43 @@ Chemistry MCQ Exam অ্যাপের ফাইল
 - AAP-র তালিকায় ভুল করে আসা “সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত” (ত্রিকোণমিতি)
   রসায়নের টপিক নয় বলে সিলেক্টরে রাখা হয়নি।
 
+## নতুন: মাল্টি-পেজ অ্যাপ + AAP Pathshala পোর্টাল (2026-11-21)
+
+অ্যাপটি এখন React Router-সহ মাল্টি-পেজ অ্যাপ:
+
+- `/` — **ড্যাশবোর্ড:** পরিসংখ্যান (আসল ব্যাংক থেকে গণনা), কুইক-স্টার্ট কার্ড,
+  পরীক্ষা ও AAP পোর্টালের লিংক কার্ড, AAP সংযোগ পরীক্ষা।
+- `/exam-portal` — **পরীক্ষা পোর্টাল:** আগের নিজস্ব-প্রশ্নব্যাংকের পরীক্ষা
+  (বিষয় → অধ্যায় → টপিক, টাইমার, প্যালেট, ফলাফল)। পরীক্ষা চলাকালীন রুট
+  `/exam-portal/exam`, ফলাফল `/exam-portal/results` — ব্রাউজারের Back
+  বোতামে পোর্টালে ফেরা যায়।
+- `/aap-portal` — **AAP Pathshala পোর্টাল:** আসল
+  `https://aapathshala.com/exams` একটি পূর্ণ-ভিউপোর্ট iframe-এ লোড হয় —
+  AAP-র কনটেন্ট পুনরায় বানানো বা বদলানো হয়নি, কোনো প্রশ্ন কপি করা হয়নি।
+- `/profile` — **প্রোফাইল:** নাম/লক্ষ্য/ফোন localStorage-এ সংরক্ষণ, আর
+  সম্পন্ন পরীক্ষার ইতিহাস (তারিখ, পত্র, স্কোর, সঠিক/ভুল/ফাঁকা)।
+- `/settings` — **সেটিংস:** ডিফল্ট নেগেটিভ মার্কিং, সময়, প্রশ্ন সংখ্যা,
+  থিম (হালকা/গাঢ়/সিস্টেম — আসলেই কাজ করে) ও ইতিহাস মোছা; ডিফল্টগুলো
+  পরীক্ষা পোর্টালে প্রযোজ্য হয়।
+
+### AAP iframe সামঞ্জস্য (যাচাইকৃত তথ্য)
+
+`curl -I https://aapathshala.com/exams` (2026-11-21) HTTP 200 ফেরত দেয়,
+`X-Frame-Options: ALLOWALL` সহ, এবং কোনো Content-Security-Policy
+`frame-ancestors` হেডার নেই — তাই হেডার দিয়ে ফ্রেমিং ব্লক করা হয়নি। তবুও
+অ্যাপ কোনো নিরাপত্তা নিয়ম বাইপাস করে না।
+
+- লোডিং: iframe-এর `onLoad` ইভেন্টে লোডিং ইনডিকেটর লুকানো হয়।
+- ব্যর্থতা শনাক্তকরণ: `onError`, ২০ সেকেন্ডের নো-লোড টাইমআউট, এবং
+  “পেজ লোড হচ্ছে না?” বোতাম। ব্যর্থ হলে পোর্টালের ভেতরেই সুন্দর ফলব্যাক
+  স্ক্রিন আসে — “Open AAP Pathshala” বোতাম (নতুন ট্যাবে আসল সাইট) + Reload।
+  লোড হয়নি এমন অবস্থায় কখনো “পরীক্ষা লোড হয়েছে” বলা হয় না, AAP-র
+  পরীক্ষার কোনো নকল কনটেন্ট দেখানো হয় না।
+- AAP-তে লগইন/সেশন লাগলে সেটি তাদের সাইটেই হয় — SP Exam সেই তথ্য দেখতে বা
+  সংরক্ষণ করতে পারে না (পোর্টালে এ কথা লেখা আছে)।
+- লোকালে iframe-এর আসল রেন্ডারিং যাচাই করা যায়নি — Vercel deploy-এর পর
+  ব্রাউজারে পরীক্ষা করতে হবে।
+
 ## কী কী আছে
 
 - ড্যাশবোর্ড: বিষয় → অধ্যায় → টপিক, প্রশ্ন সংখ্যা (৫/১০/২০/২৫ — উপলব্ধ
@@ -101,20 +138,28 @@ sp-exam/
 ├── vite.config.js
 ├── tailwind.config.js
 ├── postcss.config.js
-├── vercel.json                 # Vite build + /api rewrite
+├── vercel.json                 # Vite build + /api rewrite + SPA fallback (সব রুট → index.html)
 ├── api/
 │   └── aapathshala-test.js     # Vercel Serverless Function (reachability test only)
 └── src/
     ├── main.jsx
-    ├── App.jsx                 # dashboard → exam → results state machine
-    ├── index.css
+    ├── App.jsx                 # BrowserRouter + exam state (routes: /, /exam-portal, /aap-portal, /profile, /settings)
+    ├── index.css               # Tailwind + dark-theme overrides
+    ├── lib/
+    │   ├── exam.js             # filter, shuffle, scoring, time helpers
+    │   └── store.js            # localStorage: profile, settings, exam history, theme
+    ├── pages/
+    │   ├── DashboardPage.jsx   # / overview + stats + link cards
+    │   ├── ExamPortal.jsx      # /exam-portal (existing exam selection flow)
+    │   ├── AapPortal.jsx       # /aap-portal (original AAP site in a full-viewport iframe + fallback)
+    │   ├── ProfilePage.jsx     # /profile (editable profile + exam history)
+    │   └── SettingsPage.jsx    # /settings (exam defaults, theme, clear history)
     ├── data/
     │   ├── chemistry.js        # ৫০টি প্রশ্নের নিজস্ব ব্যাংক (JSON)
     │   └── catalog.js          # অধ্যায়/টপিকের নামের তালিকা
-    ├── lib/
-    │   └── exam.js             # filter, shuffle, scoring, time helpers
     └── components/
-        ├── Dashboard.jsx
+        ├── Layout.jsx          # sidebar + header + mobile nav shell
+        ├── Dashboard.jsx       # exam selection UI (reused by Exam Portal)
         ├── ConnectionTest.jsx
         ├── Exam.jsx
         └── Results.jsx
