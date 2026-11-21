@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Keep focus visible everywhere (keyboard users). */
+:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 2px;
+}
